@@ -6,7 +6,7 @@ WITH product_detail AS (
     pc.CategoryName,
     p.Price
   FROM `ninth-territory-360214.vix_rakamin.products` AS p
-  INNER JOIN `ninth-territory-360214.vix_rakamin.product_category` AS pc
+  LEFT JOIN `ninth-territory-360214.vix_rakamin.product_category` AS pc
   ON p.Category = pc.CategoryID
 ),
 
@@ -25,9 +25,9 @@ complete_table AS (
     o.Quantity AS qty,
     (o.Quantity * pd.Price) AS total_sales
   FROM `ninth-territory-360214.vix_rakamin.orders` AS o
-  INNER JOIN `ninth-territory-360214.vix_rakamin.customer` AS c
+  LEFT JOIN `ninth-territory-360214.vix_rakamin.customer` AS c
   ON o.CustomerID = c.CustomerID
-  INNER JOIN product_detail AS pd
+  LEFT JOIN product_detail AS pd
   ON o.ProdNumber = pd.ProdNumber
 )
 
